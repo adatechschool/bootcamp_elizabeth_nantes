@@ -12,7 +12,7 @@ public class CallCenter {
         directors = new ArrayList<>();
 
         // Initialize with some employees
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             respondents.add(new Respondent(this));
         }
 
@@ -27,6 +27,7 @@ public class CallCenter {
         for (Respondent respondent : respondents) {
             if (respondent.isFree()) {
                 respondent.receiveCall(call);
+                respondent.setFree(false);
                 return;
             }
         }
@@ -34,6 +35,7 @@ public class CallCenter {
         for (Manager manager : managers) {
             if (manager.isFree()) {
                 manager.receiveCall(call);
+                manager.setFree(false);
                 return;
             }
         }
@@ -41,6 +43,7 @@ public class CallCenter {
         for (Director director : directors) {
             if (director.isFree()) {
                 director.receiveCall(call);
+                director.setFree(false);
                 return;
             }
         }

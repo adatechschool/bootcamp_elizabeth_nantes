@@ -6,8 +6,13 @@ public class Main {
         Call call3 = new Call();
         Call call4 = new Call();
         Call call5 = new Call();
-
+        Call call6 = new Call();
 
         callCenter.dispatchCall(call);
+        callCenter.dispatchCall(call2);
+        callCenter.dispatchCall(call3);
+        callCenter.dispatchCall(call4);
+        callCenter.dispatchCall(call5);
+        callCenter.dispatchCall(call6);
     }
 }

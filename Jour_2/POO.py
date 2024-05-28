@@ -3,44 +3,36 @@ who is free. If the respondent can't handle the call, he or she must escalate th
 should be escalated to a director. Design the classes and data structures for this problem. Implement a method dispatchCall() which assigns a call to the first available 
 employee."""
 
-#Respondent
-class RespondentCall():
+# Classe générale
+class CallCenter:
     def __init__(self, name, free=False):
-        self.name = "Respondent"
-        self.free=free
+        self.name = name
+        self.free = free
 
-    def dispatchCall(self):
-        if self.free ==True:
-            print(f"{self.name} a pris l'appelle")
+    def dispatchCall(self, next_level=None):
+        if self.free:
+            print(f"{self.name} a pris l'appel")
         else:
-            print(f"{self.name} a rejeté, le passé au suivant")
-            ManagerCall()
+            print(f"{self.name} a rejeté l'appel, le passé au suivant")
+            if next_level:
+                next_level.dispatchCall()
 
-#Manager
-class ManagerCall(RespondentCall):
-    def __init__(self, name, free=False):
-        self.name = "Manager"
-        self.free=free
+# Respondent
+class RespondentCall(CallCenter):
+    pass
 
-    def dispatchCall(self):
-        if self.free ==True:
-            print(f"{self.name}  a pris l'appelle")
-        else:
-            print(f"{self.name} a rejeté, le passé au suivant")
-            DirectorCall()
+# Manager
+class ManagerCall(CallCenter):
+    pass
 
-#Director
-class DirectorCall(RespondentCall):
-    def __init__(self, name, free=False):
-        self.name = "Director"
-        self.free=True
+# Director
+class DirectorCall(CallCenter):
+    pass
 
-    def dispatchCall(self):
-        if self.free ==True:
-            print(f"{self.name}  a pris l'appelle")
-        else:
-            print(f"{self.name} a rejeté, le passé au suivant")
+# Création des instances
+respondent = RespondentCall(name="Respondent Roger", free=False)
+manager = ManagerCall(name="Manager Bernard", free=True)
+director = DirectorCall(name="Director Albert", free=False)
 
-isRespondentFree = RespondentCall()
-isRespondentFree = ManagerCall()
-isRespondentFree = DirectorCall()
+# Tentative de dispatcher l'appel à travers les niveaux
+respondent.dispatchCall(manager.dispatchCall(director))

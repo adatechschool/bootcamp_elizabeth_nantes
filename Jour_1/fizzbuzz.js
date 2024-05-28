@@ -1,5 +1,5 @@
 function count(number) {
-    for (let count= 1; number <= 100; i++) {
+    for (let number= 1; number <= 100; number++) {
         if (number %3) {
             console.log("Fizz")
         } else if (number%5) {
@@ -9,3 +9,5 @@ function count(number) {
         }       
     }
 }
+
+count(10);

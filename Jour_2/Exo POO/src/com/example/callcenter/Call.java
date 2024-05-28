@@ -4,15 +4,18 @@ public class Call {
 
     int callNumber;
     boolean isHandled;
-    String handler;
+
+    public Call(int callNumber, boolean isHandled) {
+        this.callNumber = callNumber;
+        this.isHandled = isHandled;
+    }
+
 
     public void setHandled(boolean handled) {
         isHandled = handled;
     }
 
-    public void setHandler(String handler) {
-        this.handler = handler;
-    }
+
     public void setCallNumber(int callNumber) {
         this.callNumber = callNumber;
     }
@@ -21,9 +24,7 @@ public class Call {
         return isHandled;
     }
 
-    public String getHandler() {
-        return handler;
-    }
+
 
     public int getCallNumber() {
         return callNumber;

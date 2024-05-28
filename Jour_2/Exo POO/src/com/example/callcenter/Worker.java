@@ -1,14 +1,21 @@
 package com.example.callcenter;
-
+import java.util.Comparator;
 public class Worker {
     String name;
     boolean isAvailable;
     Hierarchy hierarchy;
 
+    public Worker(String name, boolean isAvailable, Hierarchy hierarchy) {
+        this.name = name;
+        this.isAvailable = isAvailable;
+        this.hierarchy = hierarchy;
+    }
+
+
     public enum Hierarchy {
-        DIRECTOR,
+        RESPONDENT,
         MANAGER,
-        RESPONDENT
+        DIRECTOR
     }
 
     public void setName(String name) {
@@ -40,9 +47,8 @@ public class Worker {
     public void handleCall(Call call) {
         if (this.isAvailable){
             call.isHandled = true;
-            call.handler = this.name;
             this.isAvailable = false;
-            System.out.println("call n° "+call.callNumber+" has been handled by "+call.handler);
+            System.out.println("call n° "+call.callNumber+" has been handled by "+this.name);
         }
     }
 

@@ -1,0 +1,20 @@
+function countPath(stairsNumber) {
+  return countPathRec(1, stairsNumber) + countPathRec(2, stairsNumber);
+  +countPathRec(3, stairsNumber);
+}
+
+function countPathRec(step, stairsNumber) {
+  if (step === stairsNumber) {
+    return 1;
+  }
+  if (step > stairsNumber) {
+    return 0;
+  }
+  return (
+    countPathRec(1, stairsNumber - step) +
+    countPathRec(2, stairsNumber - step) +
+    countPathRec(3, stairsNumber - step)
+  );
+}
+
+console.log(countPath(1000));

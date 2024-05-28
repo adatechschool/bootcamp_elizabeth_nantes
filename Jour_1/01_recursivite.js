@@ -1,12 +1,21 @@
-function waysToRunUp(nbOfSteps) {
+function waysToRunUp(nbOfSteps, stairway = {}) {
     
     //On gère le cas où le nb de marches est négatif et le cas où il n'y a pas de marches.
-    if (nbOfSteps < 0 || nbOfSteps === 0) {
+    if (nbOfSteps < 0 ) {
         return 0;
     } 
 
+    if (nbOfSteps === 0) {
+        return 1;
+    }
+
+    //On vérifie si le résultat est déjà calculé.
+    if (stairway[nbOfSteps] != undefined){
+        return stairway[nbOfSteps];
+    }
+
     //On utilise la récursivité pour additionner le nb de façons possibles de monter les marches
-    return waysToRunUp(nbOfSteps - 1) + waysToRunUp(nbOfSteps - 2) + waysToRunUp(nbOfSteps - 3)
+    return stairway[nbOfSteps] = waysToRunUp(nbOfSteps - 1, stairway) + waysToRunUp(nbOfSteps - 2, stairway) + waysToRunUp(nbOfSteps - 3, stairway);
 
 }
 

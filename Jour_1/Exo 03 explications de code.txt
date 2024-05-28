@@ -1,0 +1,72 @@
+Voilà comment le code à été conçus : 
+
+
+<?php
+
+function majority($arr) {
+    if (empty($arr)) {
+        return "Pas de majorité";
+    }
+
+    // Compter les occurrences de chaque élément
+    $counts = array_count_values($arr);
+    arsort($counts);
+    $elemMajority = array_key_first($counts);
+    $maxCount = $counts[$elemMajority];
+
+    // Vérifier si un autre élément a le même nombre d'occurrences
+    $isUniqueMax = true;
+    foreach ($counts as $element => $count) {
+        if ($element != $elemMajority && $count == $maxCount) {
+            $isUniqueMax = false;
+            break;
+        }
+    }
+
+    if ($isUniqueMax) {
+        return (string)$elemMajority;
+    }
+
+    // Compter les nombres pairs et impairs
+    $evenCount = 0;
+    $oddCount = 0;
+    foreach ($arr as $num) {
+        if ($num % 2 == 0) {
+            $evenCount++;
+        } else {
+            $oddCount++;
+        }
+    }
+
+    if ($evenCount > $oddCount) {
+        return "Majorité pairs";
+    } elseif ($oddCount > $evenCount) {
+        return "Majorité impairs";
+    } else {
+        return "Pas de majorité";
+    }
+}
+
+// Exemples d'utilisation :
+echo majority([3, 1, 4, 1]); // "1"
+echo majority([33, 44, 55, 66, 77]); // "Majorité impairs"
+echo majority([1, 2, 3, 4]); // "Pas de majorité"
+
+ La première chose que fait la fonction est de vérifier si le tableau $arr est vide. 
+ Si le tableau est vide, il n'y a pas d'élément majoritaire possible, donc la fonction retourne immédiatement "Pas de majorité".
+
+ Comptage des occurrences des éléments: 
+  La fonction array_count_values prend un tableau en entrée et retourne un tableau associatif où les clés sont les éléments du tableau d'origine et les valeurs sont le nombre de fois que chaque élément apparaît dans le tableau. 
+  Cela permet de savoir combien de fois chaque élément apparaît dans $arr.
+
+ Initialisation des variables pour le suivi de la majorité:
+ On initialise deux variables, $majorityElement pour stocker l'élément qui apparaît le plus fréquemment et $majorityCount pour stocker le 
+ nombre de fois que cet élément apparaît.
+
+ Recherche de l'élément majoritaire:
+ On parcourt le tableau $counts. Pour chaque élément et son compte associé, si le compte actuel ($count) est supérieur à $majorityCount, on met à jour $majorityElement avec l'élément actuel et $majorityCount avec le nouveau compte.
+  Cela permet de garder une trace de l'élément qui a le plus grand nombre d'occurrences.
+
+  Vérification si l'élément majoritaire existe:
+  Après avoir trouvé l'élément avec le plus grand nombre d'occurrences, on vérifie si ce nombre est supérieur à la moitié de la taille du tableau original (count($arr) / 2). Si c'est le cas, cet élément est l'élément majoritaire et la fonction le retourne.
+   Sinon, la fonction retourne "Pas de majorité" car aucun élément n'apparaît plus de la moitié du temps.

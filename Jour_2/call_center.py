@@ -6,7 +6,7 @@ class Employees():
   def __init__(self, employees, busy):
     self.employees = employees
     #mais comment passer de None à True ou False ?
-    self.busy = None
+    self.busy = False
 
   def answerCall(self):
   def escalateCall(self):
@@ -16,6 +16,7 @@ class Respondent(Employees):
   level = 0
   def __init__(self):
     super(Respondent, self).__init__(employees, busy)
+    
 
 
 class Manager(Employees):
